@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Guía</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1>Detalle de la Guía</h1>
+
+  <form method="POST">
+    <label for="numero_guia">Número de Guía:</label><br>
+    <input type="text" id="numero_guia" name="numero_guia" value="{{ guia.numero_guia }}"><br><br>
+
+    <label for="destinatario">Destinatario:</label><br>
+    <input type="text" id="destinatario" name="destinatario" value="{{ guia.destinatario }}" readonly><br><br>
+
+    <label for="direccion">Dirección:</label><br>
+    <input type="text" id="direccion" name="direccion" value="{{ guia.direccion }}" readonly><br><br>
+
+    <label for="estado">Estado:</label><br>
+    <select id="estado" name="estado">
+      <option value="En tránsito" {% if guia.estado == 'En tránsito' %}selected{% endif %}>En tránsito</option>
+      <option value="Entregado" {% if guia.estado == 'Entregado' %}selected{% endif %}>Entregado</option>
+      <option value="Devuelto" {% if guia.estado == 'Devuelto' %}selected{% endif %}>Devuelto</option>
+    </select><br><br>
+
+    <button type="submit">Guardar cambios</button>
+  </form>
+</body>
+</html>

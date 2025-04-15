@@ -1,0 +1,7 @@
+CREATE TABLE guias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    numero_guia TEXT NOT NULL,
+    destinatario TEXT,
+    direccion TEXT,
+    estado TEXT
+);

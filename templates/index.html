@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crear Guía de Envío</title>
+    <link rel="stylesheet" href="/static/styles.css">
+
+  </head>
+  
+<body>
+  <h1>Crear Guía de Envío</h1>
+  <form action="{{ url_for('crear_guia') }}" method="post">
+    <label>Nombre completo *</label>
+    <input type="text" name="nombre" required>
+
+    <label>Teléfono *</label>
+    <input type="text" name="telefono" required>
+
+    <label>Ciudad *</label>
+    <select name="ciudad" required>
+      <option value="Guayaquil">Guayaquil</option>
+      <option value="Quito">Quito</option>
+    </select>
+
+    <label>Dirección *</label>
+    <input type="text" name="direccion" required>
+
+    <label>Dirección secundaria</label>
+    <input type="text" name="direccion_secundaria">
+
+    <label>Tipo de identificación</label>
+    <select name="tipo_id">
+      <option value="Cédula ciudadanía (CC)">Cédula ciudadanía (CC)</option>
+    </select>
+
+    <label>Número de identificación</label>
+    <input type="text" name="numero_id">
+
+    <label>Correo</label>
+    <input type="email" name="correo">
+
+    <label>Producto</label>
+    <input type="text" name="producto">
+
+    <label>Ancho (cm)</label>
+    <input type="number" step="0.1" name="ancho">
+
+    <label>Alto (cm)</label>
+    <input type="number" step="0.1" name="alto">
+
+    <label>Largo (cm)</label>
+    <input type="number" step="0.1" name="largo">
+
+    <label>Peso (kg)</label>
+    <input type="number" step="0.1" name="peso">
+
+    <label>Valor asegurado</label>
+    <input type="number" name="valor_asegurado" value="10000">
+
+    <label>Contenido de la orden (max 39 letras)</label>
+    <input type="text" name="contenido" maxlength="39">
+
+    <label>Forma de pago</label>
+    <select name="pago">
+      <option value="Crédito">Crédito</option>
+    </select>
+
+    <button type="submit">Crear Guía</button>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </form>
+</body>
+</html>
