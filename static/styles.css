@@ -1,53 +1,110 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  .container {
-    background-color: #ffffff;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  form label {
-    display: block;
-    margin-top: 15px;
-    color: #555;
-  }
-  
-  form input, form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  form button {
-    margin-top: 25px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 15px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  form button:hover {
-    background-color: #0056b3;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  background-color: #ffffff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  width: 50%;
+  margin: 15px auto 5px auto;
+  color: #555;
+  text-align: center;
+  font-size: 20px; /* Puedes cambiar este valor */
+}
+
+
+form input,
+form select {
+  width: 40%; /* Puedes cambiar este valor */
+  padding: 10px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;
+  text-align: center;
+}
+
+form button {
+  margin-top: 25px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 40%; /* Puedes cambiar este valor */
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* detalles enviosv*/
+.orders-container {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.order-item {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.order-item strong {
+  font-weight: bold;
+}
+
+.pagination {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+}
+
+.pagination a:hover {
+  background-color: #eee;
+}
+
+.pagination .current {
+  background-color: #007BFF;
+  color: white;
+  border-color: #007BFF;
+}

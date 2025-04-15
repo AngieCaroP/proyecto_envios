@@ -1,42 +1,83 @@
-document.getElementById('form-guia').addEventListener('submit', function (e) {
-    e.preventDefault();
-  
-    // Capturar los datos del formulario
-    const guia = {
-      id: Math.floor(Math.random() * 100000),
-      nombre: document.getElementById('nombre').value,
-      telefono: document.getElementById('telefono').value,
-      ciudad: document.getElementById('ciudad').value,
-      direccion: document.getElementById('direccion').value,
-      direccion_secundaria: document.getElementById('direccion_secundaria').value,
-      tipo_id: document.getElementById('tipo_id').value,
-      numero_id: document.getElementById('numero_id').value,
-      correo: document.getElementById('correo').value,
-      producto: document.getElementById('producto').value,
-      medidas: {
-        ancho: document.getElementById('ancho').value,
-        alto: document.getElementById('alto').value,
-        largo: document.getElementById('largo').value,
-        peso: document.getElementById('peso').value,
-      },
-      valor_asegurado: document.getElementById('valor_asegurado').value,
-      contenido: document.getElementById('contenido').value,
-      forma_pago: document.getElementById('pago').value,
-      estado: "Despachada",
-      transportadora: "DOMINA RECAUDO",
-      bodega: "FULFILLMENT BARRANQUILLA Tempus company",
-      creado_por: "Juan Carlos San",
-      paquetes: 2,
-      productos: 0,
-      total: 260009
-    };
-  
-    // Guardar en localStorage simulando base de datos
-    let guias = JSON.parse(localStorage.getItem("guias")) || [];
-    guias.push(guia);
-    localStorage.setItem("guias", JSON.stringify(guias));
-  
-    // Redirigir a la página de detalle
-    window.location.href = `detalle_guia.html?id=${guia.id}`;
-  });
-  
+const productos = {
+  fit_short_m: {
+    nombre: "Fit Short M",
+    dropshipping: 18200,
+    precio: 59200
+  },
+  camiseta_l: {
+    nombre: "Camiseta L",
+    dropshipping: 20000,
+    precio: 65000
+  }
+};
+
+function generarNumeroGuia() {
+  // Simple ejemplo: genera un número aleatorio con prefijo
+  const prefijo = "GUI-";
+  const numeroAleatorio = Math.floor(Math.random() * 1000000);
+  return prefijo + numeroAleatorio.toString().padStart(6, '0');
+}
+
+function colocarNumeroGuia() {
+  const idEnvioSpan = document.getElementById('envio-id');
+  if (idEnvioSpan) {
+    idEnvioSpan.textContent = generarNumeroGuia();
+  }
+}
+
+// Llama a la función para generar y colocar el número de guía al cargar la página
+document.addEventListener('DOMContentLoaded', colocarNumeroGuia);
+
+// (Opcional) Puedes llamarla en otro evento si lo deseas, por ejemplo,
+// al enfocar el campo de ID (si lo tuvieras como input)
+// const idEnvioInput = document.getElementById('envio-id');
+// if (idEnvioInput) {
+//   idEnvioInput.addEventListener('focus', colocarNumeroGuia);
+// }
+
+function sincronizarDatosFormulario() {
+  const nombreInput = document.querySelector('input[name="nombre"]');
+  const cantidadPaquetesSpan = document.getElementById('envio-cantidad-paquetes');
+  const cantidadProductosSpan = document.getElementById('envio-cantidad-productos');
+  const cobroTotalSpan = document.getElementById('envio-cobro-total');
+  const precioManualInput = document.querySelector('input[name="precio_manual"]');
+  const contenidoInput = document.querySelector('input[name="contenido"]');
+  const cantidadProductoInput = document.querySelector('input[name="cantidad_producto_input"]');
+
+  if (nombreInput && document.getElementById('envio-creado-por')) {
+    document.getElementById('envio-creado-por').textContent = nombreInput.value;
+  }
+
+  if (cantidadProductoInput && cantidadPaquetesSpan) {
+    cantidadPaquetesSpan.textContent = cantidadProductoInput.value;
+  }
+
+  if (contenidoInput && cantidadProductosSpan) {
+    cantidadProductosSpan.textContent = contenidoInput.value;
+  }
+
+  if (precioManualInput && cobroTotalSpan) {
+    cobroTotalSpan.textContent = precioManualInput.value + " COP";
+  }
+}
+
+// Agrega event listeners a los campos del formulario para sincronizar los datos
+document.addEventListener('DOMContentLoaded', () => {
+  const nombreInput = document.querySelector('input[name="nombre"]');
+  const precioManualInput = document.querySelector('input[name="precio_manual"]');
+  const contenidoInput = document.querySelector('input[name="contenido"]');
+  const cantidadProductoInput = document.querySelector('input[name="cantidad_producto_input"]');
+
+  if (nombreInput) {
+    nombreInput.addEventListener('input', sincronizarDatosFormulario);
+  }
+  if (precioManualInput) {
+    precioManualInput.addEventListener('input', sincronizarDatosFormulario);
+  }
+  if (contenidoInput) {
+    contenidoInput.addEventListener('input', sincronizarDatosFormulario);
+  }
+  if (cantidadProductoInput) {
+    cantidadProductoInput.addEventListener('input', sincronizarDatosFormulario);
+  }
+});

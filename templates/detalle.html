@@ -1,31 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Detalle de Guía</title>
-  <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Envío</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna y legible */
+          background-color: #f4f6f8; /* Gris claro suave */
+          margin: 0;
+          padding: 20px;
+          color: #333; /* Texto principal más oscuro */
+      }
+
+      .container {
+          background-color: #fff; /* Fondo blanco */
+          max-width: 800px;
+          margin: 30px auto; /* Más margen superior e inferior */
+          padding: 30px;
+          border-radius: 8px; /* Bordes ligeramente más redondeados */
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      }
+
+      h1 {
+          text-align: center;
+          color: #2c3e50; /* Azul oscuro moderno */
+          margin-bottom: 30px; /* Más espacio debajo del título */
+      }
+
+      p {
+          margin-bottom: 10px;
+          line-height: 1.6; /* Mejor espaciado entre líneas */
+      }
+
+      strong {
+          font-weight: bold;
+          color: #555; /* Énfasis en texto */
+      }
+
+      select {
+          width: auto; /* Ajustar al contenido */
+          padding: 8px 12px;
+          margin-top: 5px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          box-sizing: border-box;
+          font-size: 16px;
+          -webkit-appearance: none; /* Quitar estilos nativos en Safari */
+          -moz-appearance: none; /* Quitar estilos nativos en Firefox */
+          appearance: none; /* Quitar estilos nativos */
+          background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 7l3-3 3 3m0 6l-3 3-3-3"/></svg>');
+          background-repeat: no-repeat;
+          background-position-x: 100%;
+          background-position-y: 5px;
+          padding-right: 25px; /* Espacio para la flecha */
+      }
+
+      select:focus {
+          outline: none;
+          border-color: #3498db; /* Color de foco */
+          box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+
+      a {
+          color: #3498db; /* Azul atractivo para enlaces */
+          text-decoration: none;
+          font-weight: bold;
+      }
+
+      a:hover {
+          text-decoration: underline;
+      }
+
+      button {
+          margin-top: 25px;
+          background-color: #2ecc71; /* Verde moderno */
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 6px;
+          font-size: 16px;
+          cursor: pointer;
+          display: inline-block; /* Cambiado a inline-block para mejor flujo */
+          text-align: center;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+          transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+          background-color: #27ae60; /* Verde más oscuro al pasar el ratón */
+      }
+
+      /* Estados */
+      .status-nuevos { background-color: #e0f7fa; color: #00acc1; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Cyan con texto Teal */
+      .status-en-espera { background-color: #fffde7; color: #fdd835; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Yellow con texto Yellow */
+      .status-en-proceso { background-color: #e8f5e9; color: #43a047; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Green con texto Green */
+      .status-cancelados { background-color: #ffebee; color: #e53935; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Red con texto Red */
+      .status-parcialmente-enviados { background-color: #fbe9e7; color: #ff7043; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Orange con texto Orange */
+      .status-enviados { background-color: #f1f8e9; color: #689f38; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Very Light Green con texto Olive Green */
+      .status-cerrados { background-color: #f5f5f5; color: #757575; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Grey con texto Grey */
+      .status-parcialmente-devueltos { background-color: #fff3e0; color: #f57c00; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Orange Accent con texto Deep Orange Accent */
+      .status-devueltos { background-color: #ffe0b2; color: #d84315; border-radius: 4px; padding: 4px 8px; font-weight: bold; } /* Light Brown con texto Brown */
+  </style>
 </head>
 <body>
-  <h1>Detalle de la Guía</h1>
+    <div class="container">
+        <h1>Detalle de Envío</h1>
 
-  <form method="POST">
-    <label for="numero_guia">Número de Guía:</label><br>
-    <input type="text" id="numero_guia" name="numero_guia" value="{{ guia.numero_guia }}"><br><br>
+        <p><strong>ID:</strong> <span id="envio-id">Se crea automáticamente</span></p>
 
-    <label for="destinatario">Destinatario:</label><br>
-    <input type="text" id="destinatario" name="destinatario" value="{{ guia.destinatario }}" readonly><br><br>
+        <p><strong>Estado:</strong>
+            <select id="envio-estado" name="estado">
+                <option value="nuevos" class="status-nuevos">Nuevos</option>
+                <option value="en-espera" class="status-en-espera">En Espera</option>
+                <option value="en-proceso" class="status-en-proceso">En Proceso</option>
+                <option value="cancelados" class="status-cancelados">Cancelados</option>
+                <option value="parcialmente-enviados" class="status-parcialmente-enviados">Parcialmente Enviados</option>
+                <option value="enviados" class="status-enviados">Enviados</option>
+                <option value="cerrados" class="status-cerrados">Cerrados</option>
+                <option value="parcialmente-devueltos" class="status-parcialmente-devueltos">Parcialmente Devueltos</option>
+                <option value="devueltos" class="status-devueltos">Devueltos</option>
+            </select>
+        </p>
 
-    <label for="direccion">Dirección:</label><br>
-    <input type="text" id="direccion" name="direccion" value="{{ guia.direccion }}" readonly><br><br>
+        <p><strong>Transportadora:</strong>
+            <select id="envio-transportadora" name="transportadora">
+                <option value="domicilio-guayaquil">Domicilio Guayaquil</option>
+                <option value="domicilio-quito">Domicilio Quito</option>
+            </select>
+        </p>
 
-    <label for="estado">Estado:</label><br>
-    <select id="estado" name="estado">
-      <option value="En tránsito" {% if guia.estado == 'En tránsito' %}selected{% endif %}>En tránsito</option>
-      <option value="Entregado" {% if guia.estado == 'Entregado' %}selected{% endif %}>Entregado</option>
-      <option value="Devuelto" {% if guia.estado == 'Devuelto' %}selected{% endif %}>Devuelto</option>
-    </select><br><br>
+        <p><strong>Mensajero:</strong> <span>—</span></p>
 
-    <button type="submit">Guardar cambios</button>
-  </form>
+        <p><strong>Bodega:</strong>
+            <select id="envio-bodega" name="bodega">
+                <option value="FULFILLMENT BARRANQUILLA Tempus company">FULFILLMENT BARRANQUILLA Tempus company</option>
+                </select>
+        </p>
+
+        <p><strong>Creado por:</strong> <span id="envio-creado-por">{{ nombre }}</span></p>
+
+        <p><strong>PDF:</strong> <a href="#" id="link-pdf">Descargar Guía</a></p>
+
+        <p><strong>Cantidad de paquetes:</strong> <span id="envio-cantidad-paquetes">{{ cantidad_producto_input }}</span></p>
+
+        <p><strong>Cantidad de productos:</strong> <span id="envio-cantidad-productos">{{ contenido }}</span></p>
+
+        <p><strong>Cobro Total:</strong> <span id="envio-cobro-total">{{ precio_manual }} COP</span></p>
+
+        <div>
+            <button>Guardar Cambios</button>
+        </div>
+    </div>
+
+    <script>
+      function generarNumeroGuia() {
+        const prefijo = "GUI-";
+        const numeroAleatorio = Math.floor(Math.random() * 1000000);
+        return prefijo + numeroAleatorio.toString().padStart(6, '0');
+      }
+
+      function colocarNumeroGuia() {
+        const idEnvioSpan = document.getElementById('envio-id');
+        if (idEnvioSpan) {
+          idEnvioSpan.textContent = generarNumeroGuia();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', colocarNumeroGuia);
+
+      function sincronizarDatosFormulario() {
+        // Esta función necesitará acceder a los datos del formulario
+        // en la página anterior (index.html). Esto generalmente se hace
+        // a través del backend (Flask en tu caso). No es directamente
+        // posible que JavaScript en detalle.html acceda a los valores
+        // de un formulario en una página diferente a menos que uses
+        // mecanismos como localStorage, sessionStorage o envíes los datos
+        // a través de la URL.
+
+        // La forma correcta es que Flask pase estos datos a detalle.html
+        // al renderizar la plantilla.
+      }
+
+      // No es necesario agregar event listeners aquí en detalle.html
+      // para sincronizar con el formulario en index.html.
+      // La sincronización debe ocurrir cuando Flask renderiza detalle.html
+      // después de que se envíe el formulario desde index.html.
+  </script>
 </body>
 </html>
