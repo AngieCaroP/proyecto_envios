@@ -3,113 +3,87 @@
 <head>
     <meta charset="UTF-8" />
     <title>Crear Guía de Envío</title>
-    <link rel="stylesheet" href="/static/styles.css">  
+    <link rel="stylesheet" href="/static/stylesPaginas.css">   
+    <!-- Fuente Ubuntu desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-    <h1>Crear Guía de Envío</h1>
-    <form action="{{ url_for('crear_guia') }}" method="post">
+    <div class="layout-container">
+        <!-- Menú lateral -->
+        <div class="sidebar">
+            <h1>HOKO</h1>
+            <ul class="menu">
+                <li class="menu-item"><a href="#">Producto</a></li>
+                <li class="menu-item"><a href="#">Stock</a></li>
+                <li class="menu-item">
+                    <a href="#">Guías</a>
+                    <div class="submenu">
+                        <a href="#">Nueva Guía</a>
+                        <a href="#">Ver Guías</a>
+                    </div>
+                </li>
+                <li class="menu-item"><a href="#">Informe de Guías</a></li>
+            </ul>
+        </div>
 
-      <script>
-        function cambiarAction() {
-            document.getElementById('miFormulario').action = "{{ url_for('crear_guia') }}";
-            // El formulario se enviará automáticamente después de cambiar la acción
-        }
-    </script>
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <h1>Crear Guía de Envío</h1>
+            <form id="miFormulario" action="{{ url_for('crear_guia') }}" method="post" class="form-container">
+                <!-- Columna Izquierda: Información Personal -->
+                <div class="personal-section">
+                    <div class="form-group">
+                        <label>Nombre completo *</label>
+                        <input type="text" name="nombre" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono *</label>
+                        <input type="text" name="telefono" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Ciudad *</label>
+                        <select name="ciudad" required>
+                            <option value="Guayaquil">Guayaquil</option>
+                            <option value="Quito">Quito</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección *</label>
+                        <input type="text" name="direccion" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección secundaria</label>
+                        <input type="text" name="direccion_secundaria" />
+                    </div>
+                </div>
 
-        <label>Nombre completo *</label>
-        <input type="text" name="nombre" required />
+                <!-- Columna Derecha -->
+                <div class="right-section">
+                    <div class="form-group">
+                        <label><strong>Selecciona un producto</strong></label>
+                        <input type="text" name="producto" />
+                    </div>
 
-        <label>Teléfono *</label>
-        <input type="text" name="telefono" required />
+                    <div class="linea-horizontal"></div>
 
-        <label>Ciudad *</label>
-        <select name="ciudad" required>
-            <option value="Guayaquil">Guayaquil</option>
-            <option value="Quito">Quito</option>
-        </select>
+                    <!-- Contenido y cantidad en vertical -->
+                    <div class="orden-columna">
+                        <label><strong>Contenido de la orden (max 39 letras)</strong></label>
+                        <input type="text" name="contenido" maxlength="39" />
+                    </div>
+                    <div class="orden-columna">
+                        <label><strong>Cantidad de la orden</strong></label>
+                        <input type="number" name="cantidad" min="1" />
+                    </div>
 
-        <label>Dirección *</label>
-        <input type="text" name="direccion" required />
-
-        <label>Dirección secundaria</label>
-        <input type="text" name="direccion_secundaria" />
-
-        <label>Tipo de identificación</label>
-        <select name="tipo_id">
-            <option value="Cédula ciudadanía (CC)">Cédula ciudadanía (CC)</option>
-        </select>
-
-        <label>Número de identificación</label>
-        <input type="text" name="numero_id" />
-
-        <label>Correo</label>
-        <input type="email" name="correo" />
-
-        <label for="producto_select">Selecciona un producto</label>
-        <select id="producto_select" name="producto" required>
-            <option value="">-- Selecciona un producto --</option>
-            {% for producto in productos %}
-            <option value="{{ producto.id }}">{{ producto.nombre }}</option>
-            {% endfor %}
-        </select>
-
-        <div id="producto_info" style="margin-top: 20px;">
-            <h3>PRODUCTO SELECCIONADO</h3>
-            <p><strong>Nombre:</strong> <span id="nombre_producto"></span></p>
-            <label><strong>Precio ($):</strong></label>
-            <input type="number" id="precio_manual" name="precio_manual" step="0.01" placeholder="Ingresa el precio" />
-
-            <label><strong>Cantidad:</strong></label>
-            <input type="number" id="cantidad_producto_input" name="cantidad_producto_input" value="1" />
-
-            </div>
-
-        <label>Contenido de la orden (max 39 letras)</label>
-        <input type="text" name="contenido" maxlength="39" />
-
-        <label>Forma de pago</label>
-        <select name="pago">
-            <option value="Crédito">Crédito</option>
-        </select>
-
-        <button type="button" onclick="redirectToDetalle()">Crear Guía</button>
-      </form>
-  
-      <script>
-          function redirectToDetalle() {
-              window.location.href = "http://127.0.0.1:5501/templates/detalle.html#";
-          }
-      </script>
-
+                    <!-- Botón al final -->
+                    <button type="submit">Crear Guía</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-
-    <!-- 
-    <script>
-      function mostrarProductoSeleccionado() {
-        const producto = document.getElementById("producto_select").value;
-        const info = document.getElementById("producto_info");
-        const productoInput = document.getElementById("producto_oculto");
-      
-        if (producto) {
-          info.style.display = "block";
-          document.getElementById("nombre_producto").textContent = producto;
-          document.getElementById("dropshipping_producto").textContent = "Sí";
-          document.getElementById("precio_producto").textContent = producto === "Fit Short M" ? "10" : "15";
-          document.getElementById("subtotal_producto").textContent = producto === "Fit Short M" ? "10" : "15";
-          document.getElementById("total_producto").textContent = producto === "Fit Short M" ? "10" : "15";
-          productoInput.value = producto;
-        } else {
-          info.style.display = "none";
-          productoInput.value = "";
-        }
-      }
-      
-      function removerProducto() {
-        document.getElementById("producto_select").value = "";
-        document.getElementById("producto_info").style.display = "none";
-        document.getElementById("producto_oculto").value = "";
-        document.getElementById("total_producto").textContent = "0";
-      }
-      </script>
-      -->
