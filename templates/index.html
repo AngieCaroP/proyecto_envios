@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8" />
-    <title>Crear Guía de Envío</title>
-    <link rel="stylesheet" href="/static/stylesPaginas.css">   
-    <!-- Fuente Ubuntu desde Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <title>Crear Guía de Envío</title>
+  <link rel="stylesheet" href="/static/stylesPaginas.css">
+  <!-- Fuente Ubuntu desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
 <body>
-    <div class="layout-container">
-        <!-- Menú lateral -->
-        <div class="sidebar">
-            <h1>HOKO</h1>
-            <ul class="menu">
-                <li class="menu-item"><a href="#">Producto</a></li>
-                <li class="menu-item"><a href="#">Stock</a></li>
-                <li class="menu-item">
-                    <a href="#">Guías</a>
-                    <div class="submenu">
-                        <a href="#">Nueva Guía</a>
-                        <a href="#">Ver Guías</a>
-                    </div>
-                </li>
-                <li class="menu-item"><a href="#">Informe de Guías</a></li>
-            </ul>
-        </div>
-
-        <!-- Contenido principal -->
-        <div class="main-content">
-            <h1>Crear Guía de Envío</h1>
-            <form id="miFormulario" action="{{ url_for('crear_guia') }}" method="post" class="form-container">
-                <!-- Columna Izquierda: Información Personal -->
-                <div class="personal-section">
-                    <div class="form-group">
-                        <label>Nombre completo *</label>
-                        <input type="text" name="nombre" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono *</label>
-                        <input type="text" name="telefono" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Ciudad *</label>
-                        <select name="ciudad" required>
-                            <option value="Guayaquil">Guayaquil</option>
-                            <option value="Quito">Quito</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Dirección *</label>
-                        <input type="text" name="direccion" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Dirección secundaria</label>
-                        <input type="text" name="direccion_secundaria" />
-                    </div>
-                </div>
-
-                <!-- Columna Derecha -->
-                <div class="right-section">
-                    <div class="form-group">
-                        <label><strong>Selecciona un producto</strong></label>
-                        <input type="text" name="producto" />
-                    </div>
-
-                    <div class="linea-horizontal"></div>
-
-                    <!-- Contenido y cantidad en vertical -->
-                    <div class="orden-columna">
-                        <label><strong>Contenido de la orden (max 39 letras)</strong></label>
-                        <input type="text" name="contenido" maxlength="39" />
-                    </div>
-                    <div class="orden-columna">
-                        <label><strong>Cantidad de la orden</strong></label>
-                        <input type="number" name="cantidad" min="1" />
-                    </div>
-
-                    <!-- Botón al final -->
-                    <button type="submit">Crear Guía</button>
-                </div>
-            </form>
-        </div>
+  <div class="layout-container">
+    <!-- Menú lateral -->
+    <div class="sidebar">
+      <h1>HOKO</h1>
+      <ul class="menu">
+        <li class="menu-item"><a href="#">Producto</a></li>
+        <li class="menu-item"><a href="#">Stock</a></li>
+        <li class="menu-item">
+          <a href="#">Guías</a>
+          <div class="submenu">
+            <a href="#">Nueva Guía</a>
+            <a href="#">Ver Guías</a>
+          </div>
+        </li>
+        <li class="menu-item"><a href="#">Informe de Guías</a></li>
+      </ul>
     </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <h1>Crear Guía de Envío</h1>
+      <form id="miFormulario" action="{{ url_for('crear_guia') }}" method="post" class="form-container">
+        <!-- Columna Izquierda: Información Personal -->
+        <div class="personal-section">
+          <div class="form-group">
+            <label>Nombre completo *</label>
+            <input type="text" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Teléfono *</label>
+            <input type="text" name="telefono" required />
+          </div>
+          <div class="form-group">
+            <label>Ciudad *</label>
+            <select name="ciudad" required>
+              <option value="Guayaquil">Guayaquil</option>
+              <option value="Quito">Quito</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Dirección *</label>
+            <input type="text" name="direccion" required />
+          </div>
+          <div class="form-group">
+            <label>Dirección secundaria</label>
+            <input type="text" name="direccion_secundaria" />
+          </div>
+        </div>
+
+        <!-- Línea separadora entre columnas -->
+        <div class="separador"></div>
+
+        <!-- Columna Derecha: Selección de Producto y Orden -->
+        <div class="right-section">
+          <div class="form-group">
+            <label><strong>Selecciona un producto</strong></label>
+            <input type="text" name="producto" />
+          </div>
+
+          <div class="linea-horizontal"></div>
+
+          <!-- Contenido y cantidad en vertical -->
+          <div class="orden-columna">
+            <label><strong>Contenido de la orden (max 39 letras)</strong></label>
+            <input type="text" name="contenido" maxlength="39" />
+          </div>
+          <div class="orden-columna">
+            <label><strong>Cantidad de la orden</strong></label>
+            <input type="number" name="cantidad" min="1" />
+          </div>
+        </div>
+
+
+        <!-- Botón al final -->
+        <button type="submit">Crear Guía</button>
+    </div>
+    </form>
+  </div>
+  </div>
 </body>
+
 </html>
