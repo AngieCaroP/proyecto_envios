@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Fuente Noto Sans y Ubuntu desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Otras configuraciones -->
+  <link rel="stylesheet" href="styles_Producto.css" />
+  <title>Productos</title>
+</head>
+
+<body>
+  <div class="layout-container">
+
+    <!-- Menú lateral -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <button class="menu-toggle" onclick="toggleMenu()"></button> <!-- Tres líneas del menú -->
+        <h1 class="logo-title">HOKO</h1> <!-- Nombre "HOKO" en el centro -->
+      </div>
+      <ul class="menu" id="menu">
+        <li class="menu-item"><a href="#">Producto</a></li>
+        <li class="menu-item"><a href="#">Stock</a></li>
+        <li class="menu-item"><a href="#">Guías</a></li>
+        <li class="menu-item"><a href="#">Ver Guías</a></li>
+      </ul>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>Productos</h1>
+      <div class="products-container">
+        <!-- Barra de acciones -->
+        <div class="products-actions">
+          <input type="text" placeholder="Buscar producto..." class="search-input">
+          <div class="action-buttons">
+            <button class="btn buscar">🔍 Buscar</button>
+            <button class="btn crear">➕ Crear Producto</button>
+            <select class="dropdown">
+              <option disabled selected>📦 Importar Productos</option>
+              <option value="camisa">Camisa Casual</option>
+              <option value="reloj">Reloj Deportivo</option>
+              <option value="nuevo">Otro Producto</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tabla de productos -->
+        <div class="table-wrapper">
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all"></th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Referencia</th>
+                <th>Imágenes</th>
+                <th>Costo</th>
+                <th>Precio </th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="select-row"></td>
+                <td>001</td>
+                <td>Camisa Casual</td>
+                <td>CC2024</td>
+                <td><img src="https://via.placeholder.com/40" alt="Producto" class="img-thumb"></td>
+                <td>$25.000</td>
+                <td>$32.000</td>
+                <td>
+                  <button class="btn ver">👁️</button>
+                  <button class="btn editar">✏️</button>
+                  <button class="btn eliminar">🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="select-row"></td>
+                <td>002</td>
+                <td>Reloj Deportivo</td>
+                <td>RD5588</td>
+                <td><img src="https://via.placeholder.com/40" alt="Producto" class="img-thumb"></td>
+                <td>$45.000</td>
+                <td>$55.000</td>
+                <td>
+                  <button class="btn ver">👁️</button>
+                  <button class="btn editar">✏️</button>
+                  <button class="btn eliminar">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
