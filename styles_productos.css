@@ -22,7 +22,7 @@ h1, h2, h3 {
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* Menú lateral */
 .sidebar {
   width: 250px;
   background-color: #070E27;
@@ -33,28 +33,34 @@ h1, h2, h3 {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
 }
 
-/* Sidebar Header */
+/* Encabezado del menú lateral */
 .sidebar-header {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: flex-start; /* Alinea el contenido al inicio */
+  align-items: center; /* Centra verticalmente */
   padding: 15px 20px;
-  height: 60px;
-  width: 100%;
   border-bottom: 1px solid white;
   position: relative;
+  height: 60px;
+  width: 100%;
 }
 
-.logo-title {
+/* Nombre HOKO centrado y oculto por defecto */
+.sidebar-header .logo-title {
   font-size: 22px;
   font-weight: bold;
   color: white;
-  margin: 0 auto;
+  text-align: center;
+  margin: 0;
   flex-grow: 1;
+  
+  transition: opacity 0.3s ease-in-out; /* Transición suave para mostrarlo */
 }
 
+/* Menú Hamburguesa (tres líneas) - Fijo a la izquierda */
 .menu-toggle {
   background: none;
   border: none;
@@ -62,14 +68,22 @@ h1, h2, h3 {
   font-size: 28px;
   cursor: pointer;
   position: absolute;
-  left: 20px;
+  left: 20px; /* Alineado a la izquierda */
+  display: block; /* Visible solo cuando el nombre "HOKO" no está visible */
+  opacity: 1; /* Visible por defecto */
+  transition: opacity 0.3s ease-in-out; /* Transición suave para mostrarlo */
 }
 
-/* Menu */
+/* Menú de elementos */
 .menu {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
+}
+
+.menu-item {
+  position: relative;
 }
 
 .menu a {
@@ -77,25 +91,28 @@ h1, h2, h3 {
   padding: 15px 20px;
   color: white;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .menu a:hover {
   background-color: #1E3A8A;
+  font-weight: bold;
 }
 
-/* Main Content */
+/* Contenido principal */
 .main-content {
   margin-left: 250px;
   flex-grow: 1;
   padding: 30px;
 }
 
-/* Títulos principales */
 .main-content h1 {
   text-align: center;
-  font-size: 36px; /* Aumentamos el tamaño de los encabezados */
-  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #070E27;
   border-bottom: 2px solid #070E27;
+  margin-bottom: 30px;
   padding-bottom: 10px;
 }
 
@@ -194,21 +211,107 @@ h1, h2, h3 {
   border-radius: 5px;
 }
 
-/* Responsividad */
+/* Estilo del option Importar Productos */
+select {
+  width: 100%;
+  padding: 18px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #070E27;
+  cursor: pointer;
+  appearance: none; /* Elimina la apariencia predeterminada del select en algunos navegadores */
+}
+
+/* Estilo específico para el option Importar Productos */
+select option[disabled] {
+  color: #ccc;
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Asegura que el option Importar Productos tenga el mismo tamaño de botón */
+select option {
+  padding: 15px;
+  font-size: 16px;
+}
+
+/* Agrega estilo al select cuando se le hace focus */
+select:focus {
+  border-color: #070E27;
+  outline: none;
+}
+
+/* Opcional: estiliza el área del select para que se vea como un botón */
+select {
+  text-align: center; /* Centra el texto dentro del select */
+}
+
+/* Responsive */
 @media screen and (max-width: 1100px) {
   .layout-container {
     flex-direction: column;
   }
 
+  /* Sidebar fijo y limpio */
   .sidebar {
-    position: relative;
     width: 100%;
     height: auto;
+    position: relative;
   }
 
+  /* ✅ Hacemos que el header con "Hoko" quede fijo arriba */
+  .sidebar-header {
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #070E27;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .logo-title {
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    background-color: #070E27;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* ✅ Menú fijo debajo del header */
+  .menu.show {
+    display: flex;
+    position: fixed;
+    top: 60px; /* debajo del header fijo */
+    left: 0;
+    z-index: 999;
+    width: 100%; /* asegúrate de que ocupe todo el ancho */
+  }
+  
+
   .main-content {
-    margin-left: 0;
+    margin: 0;
     padding: 20px;
+    margin-top: 60px; /* altura del header */
+  }
+
+  /* Si el menú está visible, subimos el margen más */
+  .menu.show ~ .main-content {
+    margin-top: 120px; /* header (60) + menú (60) */
   }
 
   .products-actions {
@@ -225,43 +328,12 @@ h1, h2, h3 {
     width: 100%;
   }
 
-  /* Mostrar el botón hamburguesa en pantallas pequeñas */
   .menu-toggle {
-    display: block;
     background: none;
     border: none;
     color: white;
-    font-size: 28px;
-    cursor: pointer;
   }
 
-  /* El menú se oculta por defecto */
-  .menu {
-    display: none;
-    flex-direction: column;
-    background-color: #070E27;
-    padding: 0;
-  }
-
-  /* Mostrar el menú cuando se activa el toggle */
-  .menu.show {
-  display: flex;
-}
-
-  /* Diseño del logo en el menú */
-  .logo-title {
-    flex-grow: 1;
-    text-align: center;
-  }
-
-  /* Rediseño del Sidebar para pantallas pequeñas */
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  /* Asegurar que el menú tenga un diseño limpio en móvil */
   .menu a {
     padding: 15px 20px;
     color: white;
