@@ -236,12 +236,11 @@ h4 {
   padding: 0.7rem 1.2rem;
   font-size: 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
   background-color: #fff;
   width: 220px;
   margin-left: 12px;
   cursor: pointer;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  
 }
 
 
