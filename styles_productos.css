@@ -15,6 +15,12 @@ h1, h2, h3 {
   color: #070E27;
 }
 
+h4 {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 14 px; /* Tamaño para títulos */
+  color: #070E27;
+}
+
 /* Layout general */
 .layout-container {
   display: flex;
@@ -126,9 +132,14 @@ h1, h2, h3 {
 /* Botones de acción */
 .products-actions {
   display: flex;
-  justify-content: space-between; /* Alineamos las acciones en fila */
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Aseguramos que los botones de acción queden en línea horizontal */
@@ -145,17 +156,47 @@ h1, h2, h3 {
   font-size: 18px; /* Aumentamos el tamaño del input */
   border: 1px solid #ccc;
   border-radius: 8px;
+  height: 1.5 rem; /* Ajusta según lo que necesites */
 }
 
 /* Botones */
 .btn {
-  padding: 12px 20px; /* Aumentamos el tamaño de los botones */
+  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 8px;
-  font-size: 16px; /* Aumentamos el tamaño del texto de los botones */
-  font-weight: bold;
-  cursor: pointer;
+  background-color: #4a90e2;
   color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 2.5rem; /* Ajusta según lo que necesites */
+}
+
+.dropdown {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: auto;
+}
+
+.popover-toggle {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4a90e2; /* Puedes cambiar el color si prefieres otro */
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 2.5rem; /* Ajuste para igualar el tamaño de los otros botones */
+}
+
+.dropdown:focus {
+  border-color: #4a90e2;
+  outline: none;
 }
 
 .btn.buscar {
@@ -164,6 +205,11 @@ h1, h2, h3 {
 
 .btn.crear {
   background-color: #28A745;
+}
+
+.btn.ver {
+  background-color: #c9c0a4;
+  color: #000;
 }
 
 .btn.editar {
@@ -177,6 +223,12 @@ h1, h2, h3 {
 
 .btn:hover {
   opacity: 0.9;
+}
+
+
+
+.popover-toggle:hover {
+  background-color:rgba(74, 144, 226, 0.8); /* Un color más oscuro para el hover */
 }
 
 /* Tabla de productos */
@@ -214,7 +266,7 @@ h1, h2, h3 {
 /* Estilo del option Importar Productos */
 select {
   width: 100%;
-  padding: 18px;
+  padding: 15px;
   margin-bottom: 15px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -250,20 +302,87 @@ select {
   text-align: center; /* Centra el texto dentro del select */
 }
 
-/* Responsive */
+/*Codigo filtro*/
+
+/* Estilo del contenedor del Popover */
+.popover-container {
+  position: relative;
+}
+
+/* Estilo del Popover */
+.popover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden; /* Oculto por defecto */
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s; /* Animación suave */
+}
+
+/* Mostrar el popover cuando la clase 'active' está presente */
+.popover.active {
+  opacity: 1;
+  visibility: visible; /* Se muestra */
+  transform: translateY(0); /* Desplazamiento hacia arriba */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Animación suave */
+}
+
+/* Estilo de los encabezados dentro del Popover */
+.popover h4 {
+  margin-top: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Estilo para los selects dentro del Popover */
+.popover select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Efecto cuando se enfoca un select */
+.popover select:focus {
+  border-color: #070E27; /* Color de enfoque */
+  outline: none; /* Eliminar borde predeterminado */
+}
+
+/* Estilo de los elementos de opción en el select */
+.popover option {
+  font-size: 0.9rem;
+}
+
+
+
+
+/* Responsive para tablets y pantallas medianas */
 @media screen and (max-width: 1100px) {
   .layout-container {
     flex-direction: column;
   }
 
-  /* Sidebar fijo y limpio */
   .sidebar {
     width: 100%;
     height: auto;
     position: relative;
   }
 
-  /* ✅ Hacemos que el header con "Hoko" quede fijo arriba */
   .sidebar-header {
     height: 60px;
     position: fixed;
@@ -292,26 +411,23 @@ select {
     width: 100%;
   }
 
-  /* ✅ Menú fijo debajo del header */
   .menu.show {
     display: flex;
     position: fixed;
-    top: 60px; /* debajo del header fijo */
+    top: 60px;
     left: 0;
     z-index: 999;
-    width: 100%; /* asegúrate de que ocupe todo el ancho */
+    width: 100%;
   }
-  
 
   .main-content {
     margin: 0;
     padding: 20px;
-    margin-top: 60px; /* altura del header */
+    margin-top: 60px;
   }
 
-  /* Si el menú está visible, subimos el margen más */
   .menu.show ~ .main-content {
-    margin-top: 120px; /* header (60) + menú (60) */
+    margin-top: 120px;
   }
 
   .products-actions {
@@ -343,4 +459,37 @@ select {
   .menu a:hover {
     background-color: #1E3A8A;
   }
+
+  .popover {
+    position: fixed;
+    top: 100px; /* Ajusta según la altura de tu header */
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: 90%;
+    z-index: 1001;
+    border-radius: 12px;
+    padding: 20px;
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .popover h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .popover select {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 18px;
+  }
+
+  .btn-filtros {
+    width: 100%; /* Que el botón de filtros ocupe todo el ancho si se desea */
+    margin-bottom: 10px;
+  }
 }
+
+
+

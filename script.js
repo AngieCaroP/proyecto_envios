@@ -23,3 +23,23 @@ function toggleMenu() {
       menu.classList.toggle('show');
     });
   });
+
+//codigo filtro 
+
+// Código filtro
+
+const toggleIcon = document.querySelector('.popover-toggle');
+const popover = document.querySelector('.popover');
+
+// Mostrar o ocultar el popover al hacer clic en el botón
+toggleIcon.addEventListener('click', (e) => {
+  e.stopPropagation(); // Evitar que el evento se propague
+  popover.classList.toggle('active'); // Alternar la clase 'active' en el popover
+});
+
+// Cierra el popover si se hace clic fuera de él
+document.addEventListener('click', (e) => {
+  if (!popover.contains(e.target) && !toggleIcon.contains(e.target)) {
+    popover.classList.remove('active'); // Remover la clase 'active' para ocultar el popover
+  }
+});
