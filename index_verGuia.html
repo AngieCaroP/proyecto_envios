@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Ubuntu:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles_productos.css" />
+    <title>Ver Guía</title>
+</head>
+
+<body>
+    <div class="layout-container">
+
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú lateral">☰</button>
+                <h1 class="logo-title">HOKO</h1>
+            </div>
+            <nav>
+                <ul class="menu" id="menu" aria-label="Menú de navegación">
+                    <li class="menu-item"><a href="index_Producto.html">Producto</a></li>
+                    <li class="menu-item"><a href="index_stocks.html">Stock</a></li>
+                    <li class="menu-item"><a href="index.html">Guías</a></li>
+                    <li class="menu-item"><a href="index_verGuia.html">Ver Guías</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header>
+                <h1>Ver Guía</h1>
+            </header>
+
+            <!-- Barra de acciones -->
+            <section class="products-actions">
+                <input type="text" placeholder="Buscar producto..." class="search-input" aria-label="Buscar producto">
+                <div class="action-buttons">
+                    <button class="btn buscar" aria-label="Buscar producto">🔍 Buscar</button>
+
+                    <!-- Nueva acción del select -->
+                   
+                    <select id="accion-seleccionada-nueva" class="dropdown-nueva-accion"
+                        aria-label="Seleccionar nueva acción">
+                        <option value="" disabled selected>Seleccionar acción</option>
+                        <option value="impresion">Impresión masiva usando números de guía</option>
+                        <option value="envio">Envío masivo de notificaciones</option>
+                    </select>
+
+                    <!-- Contenedor del Popover -->
+                    <div class="popover-container">
+                        <button class="popover-toggle" aria-label="Filtrar productos">🛠️ Filtros</button>
+                        <div class="popover" id="filterPopover" role="dialog" aria-labelledby="filterPopoverLabel"
+                            aria-hidden="true">
+                            <h4 id="filterPopoverLabel" class="sr-only">Filtros de búsqueda</h4>
+                            <div class="popover-content">
+                                <h4>ELIMINADOS</h4>
+                                <select aria-label="Mostrar productos eliminados">
+                                    <option value="" selected>—</option>
+                                    <option value="with">Con eliminados</option>
+                                    <option value="only">Solo eliminados</option>
+                                </select>
+
+                                <h4>POR PÁGINA</h4>
+                                <select aria-label="Seleccionar cantidad de productos por página">
+                                    <option>25</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabla de productos -->
+            <section class="table-wrapper">
+                <table class="products-table" aria-label="Tabla de productos">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select-all" aria-label="Seleccionar todos los productos"></th>
+                            <th>ID</th>
+                            <th>Fechas</th>
+                            <th>Estado</th>
+                            <th>Número de guía</th>
+                            <th>Centro de costos</th>
+                            <th>Transportadora</th>
+                            <th>Impresa</th>
+                            <th>Reingreso físico</th>
+                            <th>Orden</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="select-row" aria-label="Seleccionar producto 1395718"></td>
+                            <td>1395718</td>
+                            <td>Creación: 21 abril 2025 08:11:07<br>Última actualización: 21 abril 2025 08:11:10</td>
+                            <td><span class="estado activa">Activa</span></td>
+                            <td>HK28236478000351</td>
+                            <td>FULFILLMENT MEDELLÍN Tempus company</td>
+                            <td>FULFILLMENT MULTIPLATAFORMA</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>T25970S</td>
+                            <td>
+                                <button class="btn ver" aria-label="Ver producto">👁️</button>
+                                <button class="btn editar" aria-label="Editar producto">✏️</button>
+                                <button class="btn eliminar" aria-label="Eliminar producto">🗑️</button>
+                            </td>
+                        </tr>
+                        <!-- Más filas... -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
