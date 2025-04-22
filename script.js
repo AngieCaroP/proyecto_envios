@@ -43,3 +43,7 @@ document.addEventListener('click', (e) => {
     popover.classList.remove('active'); // Remover la clase 'active' para ocultar el popover
   }
 });
+
+
+
+
